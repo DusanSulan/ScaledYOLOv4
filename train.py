@@ -310,8 +310,7 @@ def train(hyp, opt, device, tb_writer=None):
                                                  model=ema.ema.module if hasattr(ema.ema, 'module') else ema.ema,
                                                  single_cls=opt.single_cls,
                                                  dataloader=testloader,
-                                                 save_dir=log_dir,
-                                                 save_txt = True)
+                                                 save_dir=log_dir)
 
             # Write
             with open(results_file, 'a') as f:
