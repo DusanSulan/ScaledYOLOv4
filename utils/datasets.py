@@ -65,6 +65,7 @@ def create_dataloader(path, imgsz, batch_size, stride, opt, hyp=None, augment=Fa
     
     start = start * len(dataset)
     end = end * len(dataset)
+    indices = list(range(0, len(dataset)))
     dataset = torch.utils.data.Subset(dataset, indices[start:end])
     dataloader = torch.utils.data.DataLoader(dataset,
                                              batch_size=batch_size,
