@@ -63,11 +63,21 @@ def create_dataloader(path, imgsz, batch_size, stride, opt, hyp=None, augment=Fa
     nw = min([os.cpu_count() // world_size, batch_size if batch_size > 1 else 0, 8])  # number of workers
     train_sampler = torch.utils.data.distributed.DistributedSampler(dataset) if local_rank != -1 else None
     
+    '''
     start = int(start * len(dataset))
     end = int(end * len(dataset))
     indices = list(range(0, len(dataset)))
-    dataset = torch.utils.data.Subset(dataset, indices[start:end])
-    dataloader = torch.utils.data.DataLoader(dataset,
+    SubsetRandomSampler
+    dataset = SubsetRandomSampler(dataset, indices[start:end])
+    '''
+    dataset, valid_ds = torch.utils.data.random_split(dataset, (0, 100))
+    print(test_ds, valid_ds)
+    print(test_ds.indices, valid_ds.indices)
+
+    
+    
+    
+    dataloader = SubsetRandomSampler(dataset,
                                              batch_size=batch_size,
                                              num_workers=nw,
                                              sampler=train_sampler,
