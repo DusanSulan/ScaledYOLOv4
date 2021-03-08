@@ -147,7 +147,7 @@ def train(hyp, opt, device, tb_writer=None):
 
     # Trainloader
     dataloader, dataset = create_dataloader(train_path, imgsz, batch_size, gs, opt, hyp=hyp, augment=True,
-                                            cache=opt.cache_images, rect=opt.rect, local_rank=rank,
+                                            cache=opt.cache_images, rect=opt.rect, local_rank=rank, train_ratio = 0.9,
                                             world_size=opt.world_size)
     mlc = np.concatenate(dataset.labels, 0)[:, 0].max()  # max label class
     nb = len(dataloader)  # number of batches
