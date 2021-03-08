@@ -70,7 +70,7 @@ def create_dataloader(path, imgsz, batch_size, stride, opt, hyp=None, augment=Fa
     SubsetRandomSampler
     dataset = SubsetRandomSampler(dataset, indices[start:end])
     '''
-    dataset, valid_ds = torch.utils.data.random_split(dataset, (0, 100))
+    dataset, valid_ds = torch.utils.data.random_split(dataset, (800, 100))
     print(test_ds, valid_ds)
     print(test_ds.indices, valid_ds.indices)
 
